@@ -1,0 +1,14 @@
+{
+  "name": "ricardo/crud_login-phpoo",
+  "authors": [
+      {
+          "name": "Ricardo Costa da Silva",
+          "email": "rcsilva2405@gmail.com"
+      }
+  ],
+  "autoload": {
+    "psr-4": {
+        "app\\": "app"
+    }
+  }
+}
