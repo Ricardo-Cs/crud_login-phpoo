@@ -6,13 +6,11 @@ use App\Dao\UsuarioDao;
 use App\Models\UsuarioModel;
 
 class UsuarioController {
-  public $usuarios = "teste";
-
   public function insert($dados) {
     // Recebe os dados do formulário via POST
     $nome = $dados[0];
     $email = $dados[1];
-    $senha = $dados[2];
+    $senha = md5($dados[2]);
 
     // Cria uma instância do modelo com os dados recebidos
     $usuarioModel = new UsuarioModel();
@@ -28,6 +26,13 @@ class UsuarioController {
   public function get() {
     $dao = new UsuarioDao();
     $usuarios = $dao->get();
+    return $usuarios;
+  }
+
+  public function getById($id) {
+    $dao = new UsuarioDao();
+    $usuario = $dao->getById($id);
+    return $usuario;
   }
 
   public function update($dados) {

@@ -25,6 +25,20 @@ class UsuarioDao {
     }
   }
 
+  public function getById($id) {
+    $sql = 'SELECT * FROM usuarios WHERE id = ?';
+    $stmt = $this->conexao->prepare($sql);
+    $stmt->bindValue(1, $id);
+    $stmt->execute();
+
+    if ($stmt->rowCount() > 0) {
+      $resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
+      return $resultado;
+    } else {
+      return [];
+    }
+  }
+
   public function insert(UsuarioModel $usuarioModel) {
     $sql = 'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)';
 
@@ -46,10 +60,14 @@ class UsuarioDao {
     $stmt = $this->conexao->prepare($sql);
     $stmt->bindValue(1, $usuarioModel->getNome());
     $stmt->bindValue(2, $usuarioModel->getEmail());
-    $stmt->bindValue(2, $usuarioModel->getSenha());
-    $stmt->bindValue(2, $usuarioModel->getId());
+    $stmt->bindValue(3, $usuarioModel->getSenha());
+    $stmt->bindValue(4, $usuarioModel->getId());
 
-    $stmt->execute();
+    try {
+      $stmt->execute();
+    } catch (PDOException $e) {
+      echo "Erro ao editar usuário: " . $e->getMessage();
+    }
   }
 
   public function delete($id) {
@@ -57,6 +75,11 @@ class UsuarioDao {
 
     $stmt = $this->conexao->prepare($sql);
     $stmt->bindValue(1, $id);
-    $stmt->execute();
+
+    try {
+      $stmt->execute();
+    } catch (PDOException $e) {
+      echo "Erro ao deletar usuário: " . $e->getMessage();
+    }
   }
 }
