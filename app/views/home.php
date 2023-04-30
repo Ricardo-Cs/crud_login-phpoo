@@ -1,11 +1,19 @@
 <?php
 include '../../vendor/autoload.php';
 
+session_start();
+
 use App\Controllers\UsuarioController;
 
+// Pega todos os usuários do banco de dados
 $usuario = new UsuarioController();
 $usuarios = $usuario->get();
 
+// Verifica se a session logado existe
+if (!isset($_SESSION['logado'])) {
+  header('Location: ./login.php');
+  exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +42,7 @@ $usuarios = $usuario->get();
         </tr>
       </thead>
       <tbody>
+        <!-- Imprime na tela todos os usuários -->
         <?php foreach ($usuarios as $usuario) { ?>
           <tr>
             <td><?= $usuario['id']; ?></td>
@@ -50,10 +59,9 @@ $usuarios = $usuario->get();
     </table>
 
     <a href="homeForm.php" class="btn btn-success">Adicionar Cliente</a>
-
-
   </main>
 
+  <!-- Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -6,18 +6,20 @@ use App\Controllers\UsuarioController;
 
 $usuario = new UsuarioController();
 
+// Verifica se existe um id no GET(url), se existir armazena na variável e usa o método getById. 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
   $usuarioInfo = $usuario->getById($id);
 }
 
+// Verifica se existe um excluir no GET(url), se sim deleta o usuário que tem o ID de acordo com o passado na url pelo GET.
 if (isset($_GET['excluir'])) {
   $id = $_GET['id'];
   $usuarioDel = $usuario->delete($id);
   header('Location: ./home.php');
 }
 
-
+// Caso os valores enviados pelo POST não existam no banco de dados, insere eles, se já existir ele faz o update.
 if (isset($_POST['nome'])) {
   if (empty($_POST['id'])) {
     $usuario->insert([$_POST['nome'], $_POST['email'], $_POST['senha']]);
@@ -42,6 +44,7 @@ if (isset($_POST['nome'])) {
 </head>
 
 <body>
+
   <main class="container pt-3">
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -59,6 +62,7 @@ if (isset($_POST['nome'])) {
             <input type="password" class="form-control" name="senha" id="senha" placeholder="Digite sua senha" value="<?= isset($usuarioInfo['senha']) ? $usuarioInfo['senha'] : null  ?>">
           </div>
 
+          <!-- Campo invisível para enviar o id pelo método POST, utilizo ele no php no começo do código -->
           <input type="hidden" name="id" value="<?= isset($usuarioInfo['id']) ? $usuarioInfo['id'] : null ?>">
 
           <button type="submit" class="btn btn-primary">Enviar</button>
@@ -69,6 +73,7 @@ if (isset($_POST['nome'])) {
 
 
 
+  <!-- Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

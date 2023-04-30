@@ -3,6 +3,7 @@
 namespace App\Dao;
 
 use App\Models\UsuarioModel;
+use PDO;
 use PDOException;
 
 class UsuarioDao {
@@ -18,7 +19,7 @@ class UsuarioDao {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-      $resultado = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+      $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $resultado;
     } else {
       return [];
@@ -32,7 +33,7 @@ class UsuarioDao {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-      $resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
+      $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
       return $resultado;
     } else {
       return [];

@@ -2,5 +2,5 @@
 
 include './vendor/autoload.php';
 
-header('Location: ./app/views/home.php');
+header('Location: ./app/views/login.php');
 exit;
