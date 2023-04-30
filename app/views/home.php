@@ -28,7 +28,7 @@ if (!isset($_SESSION['logado'])) {
   <script src="../../assets/js/script.js" defer></script>
 </head>
 
-<body>
+<body style="background-color: #F2F2F2;">
   <main class="container pt-3 table-responsive">
     <h1 class="text-center">Listagem de Usuários</h1>
     <table class="table table-hover">

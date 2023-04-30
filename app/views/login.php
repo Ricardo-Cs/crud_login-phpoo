@@ -38,7 +38,7 @@ if (isset($_POST['email'])) {
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color: #F2F2F2;">
 
   <main class="container pt-3">
     <div class="row justify-content-center">
@@ -53,12 +53,14 @@ if (isset($_POST['email'])) {
             <label for="senha">Senha:</label>
             <input type="password" class="form-control" name="senha" id="senha" placeholder="Digite sua senha">
           </div>
-          <?php if ($loginMensagem == true) { ?>
-            <span>Login inválido</span>
-          <?php } ?>
-
 
           <button type="submit" class="btn btn-primary">Enviar</button>
+
+          <div class="form-group text-center mt-3">
+            <?php if ($loginMensagem == true) { ?>
+              <span class="text-danger mx-auto">Login inválido! Tente novamente</span>
+            <?php } ?>
+          </div>
         </form>
       </div>
     </div>
